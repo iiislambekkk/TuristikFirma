@@ -1,7 +1,7 @@
-﻿using TuristikFirma.TuristikFirma.Core.Abstractions;
-using TuristikFirma.TuristikFirma.Core.Models;
+﻿using TuristikFirma.Abstractions;
+using TuristikFirma.Models;
 
-namespace TuristikFirma.Turistik.Firma.Application.Services
+namespace TuristikFirma.Services
 {
     public class PostsService : IPostsService
     {

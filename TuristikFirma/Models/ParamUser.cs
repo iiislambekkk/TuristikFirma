@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TuristikFirma.TuristikFirma.Core.Models
+namespace TuristikFirma.Models
 {
     public class ParamUser
     {
         [Required]
-        [DataType(DataType.EmailAddress)] 
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
-        [DataType(DataType.Password)] 
+        [DataType(DataType.Password)]
 
         public string Password { get; set; }
     }

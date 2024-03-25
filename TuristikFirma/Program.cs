@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TuristikFirma;
-using TuristikFirma.Turistik.Firma.Application.Services;
-using TuristikFirma.TuristikFirma.Core.Abstractions;
+using TuristikFirma.Abstractions;
+using TuristikFirma.Services;
 using TuristikFirma.TuristikFirma.DataAccess;
 using TuristikFirma.TuristikFirma.DataAccess.Repositories;
 

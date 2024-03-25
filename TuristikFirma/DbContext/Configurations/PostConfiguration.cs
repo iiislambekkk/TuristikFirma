@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TuristikFirma.TuristikFirma.Core.Models;
+using TuristikFirma.Models;
 using TuristikFirma.TuristikFirma.DataAccess.Entities;
 
 namespace TuristikFirma.TuristikFirma.DataAccess.Configurations

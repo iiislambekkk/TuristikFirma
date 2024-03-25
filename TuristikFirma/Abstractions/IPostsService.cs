@@ -1,6 +1,6 @@
-﻿using TuristikFirma.TuristikFirma.Core.Models;
+﻿using TuristikFirma.Models;
 
-namespace TuristikFirma.TuristikFirma.Core.Abstractions
+namespace TuristikFirma.Abstractions
 {
     public interface IPostsService
     {

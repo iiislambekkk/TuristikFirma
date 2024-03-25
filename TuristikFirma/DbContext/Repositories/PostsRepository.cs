@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TuristikFirma.TuristikFirma.Core.Abstractions;
-using TuristikFirma.TuristikFirma.Core.Models;
+using TuristikFirma.Abstractions;
+using TuristikFirma.Models;
 using TuristikFirma.TuristikFirma.DataAccess.Entities;
 
 namespace TuristikFirma.TuristikFirma.DataAccess.Repositories

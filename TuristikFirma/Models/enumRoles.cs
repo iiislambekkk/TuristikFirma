@@ -1,4 +1,4 @@
-﻿namespace TuristikFirma.TuristikFirma.Core.Models
+﻿namespace TuristikFirma.Models
 {
     public enum enumRoles
     {

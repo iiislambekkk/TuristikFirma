@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TuristikFirma.TuristikFirma.Core.Models
+namespace TuristikFirma.Models
 {
     public class OtherParamUser : ParamUser
     {

@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using TuristikFirma.Abstractions;
 using TuristikFirma.Contracts;
-using TuristikFirma.TuristikFirma.Core.Abstractions;
-using TuristikFirma.TuristikFirma.Core.Models;
+using TuristikFirma.Models;
 
 namespace TuristikFirma.Controllers
 {
@@ -66,6 +70,40 @@ namespace TuristikFirma.Controllers
         public async Task<ActionResult<Guid>> DeletePost(Guid id)
         {
             return Ok(await _postsService.DeletePost(id));
+        }
+
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            var result = await WriteFile(file);
+            return Ok(result);
+        }
+
+        private async Task<string> WriteFile(IFormFile file)
+        {
+            string filename = "";
+            try
+            {
+                var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+                filename = DateTime.Now.Ticks.ToString() + extension;
+
+                var filepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\bred");
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+                }
+
+                var exactpath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\bred", filename);
+                using (var stream = new FileStream(exactpath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return filename;
         }
     }
 }
