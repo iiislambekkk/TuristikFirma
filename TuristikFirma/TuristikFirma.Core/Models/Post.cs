@@ -2,7 +2,7 @@
 {
     public class Post
     {
-        public const int MAX_TITLE_LENGTH = 255;
+        public const int MAX_TITLE_LENGTH = 242;
 
         private Post(Guid id, string title, string description, decimal price)
         {
