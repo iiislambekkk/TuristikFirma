@@ -16,11 +16,11 @@ namespace TuristikFirma.Controllers
     
     public class AuthorizeController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly JWTSettings _options;
 
-        public AuthorizeController(UserManager<IdentityUser> user, SignInManager<IdentityUser> signIn, IOptions<JWTSettings> optAccess) 
+        public AuthorizeController(UserManager<User> user, SignInManager<User> signIn, IOptions<JWTSettings> optAccess) 
         {
             _userManager = user;
             _signInManager = signIn;
@@ -30,7 +30,7 @@ namespace TuristikFirma.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(OtherParamUser paramUser)
         {
-            var user = new IdentityUser { UserName = paramUser.UserName, Email = paramUser.Email };
+            var user = new User { UserName = paramUser.UserName, Email = paramUser.Email, avatarPath = paramUser.avatarPath};
 
             var result = await _userManager.CreateAsync(user, paramUser.Password);
 
@@ -52,7 +52,7 @@ namespace TuristikFirma.Controllers
             return Ok();
         }
 
-        private string GetToken(IdentityUser user, IEnumerable<Claim> prinicpal)
+        private string GetToken(User user, IEnumerable<Claim> prinicpal)
         {
             var claims = prinicpal.ToList();
 
@@ -86,8 +86,7 @@ namespace TuristikFirma.Controllers
 
                 string[] role = ("" + claims.FirstOrDefault(x => x.Type == "Role")).Split(" ");
 
-                
-                var rez = System.Text.Json.JsonSerializer.Serialize(new LoginResponse(token, role[1]));
+                var rez = System.Text.Json.JsonSerializer.Serialize(new LoginResponse(token, role[1], user.Id, user.UserName));
                 return Ok(rez);
             }
 

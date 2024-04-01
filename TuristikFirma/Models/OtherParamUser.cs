@@ -8,5 +8,7 @@ namespace TuristikFirma.Models
 
         [Required]
         public enumRoles Role { get; set; }
+
+        public string? avatarPath { get; set; } = " ";
     }
 }

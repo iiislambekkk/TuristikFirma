@@ -5,16 +5,12 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TuristikFirma;
 using TuristikFirma.Abstractions;
+using TuristikFirma.Models;
 using TuristikFirma.Services;
 using TuristikFirma.TuristikFirma.DataAccess;
 using TuristikFirma.TuristikFirma.DataAccess.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-/*
-builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(TuristikFirmaDbContext))));*/
-
 
 builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection("JWTSettings"));
 
@@ -44,7 +40,6 @@ builder.Services.AddAuthentication(options =>
 });
 
 
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -52,13 +47,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TuristikFirmaDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(TuristikFirmaDbContext))));
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<TuristikFirmaDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<TuristikFirmaDbContext>();
 
 builder.Services.AddAuthorization(option =>
 {
     option.AddPolicy("OnlyAdmin", policyBuilder => policyBuilder.RequireClaim("Role", "Admin"));
 });
 
+builder.Services.AddScoped<IHelperService, HelperService>();
 builder.Services.AddScoped<IPostsService, PostsService>();
 builder.Services.AddScoped<IPostsRepository, PostsRepository>();
 
@@ -66,6 +62,7 @@ builder.Services.AddScoped<IPostsRepository, PostsRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -88,3 +85,4 @@ app.UseCors(x =>
 });
 
 app.Run();
+

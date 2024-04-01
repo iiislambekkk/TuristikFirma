@@ -5,6 +5,8 @@ namespace TuristikFirma.Contracts
     public record LoginResponse
     (
         string token,
-        string role
+        string role,
+        string userId,
+        string userName
     );
 }
