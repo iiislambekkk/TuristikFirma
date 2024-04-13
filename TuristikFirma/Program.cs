@@ -55,8 +55,8 @@ builder.Services.AddAuthorization(option =>
 });
 
 builder.Services.AddScoped<IHelperService, HelperService>();
-builder.Services.AddScoped<IPostsService, PostsService>();
-builder.Services.AddScoped<IPostsRepository, PostsRepository>();
+builder.Services.AddScoped<IToursService, ToursService>();
+builder.Services.AddScoped<IToursRepository, ToursRepository>();
 
 
 var app = builder.Build();

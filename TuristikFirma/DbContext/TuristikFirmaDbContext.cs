@@ -13,6 +13,6 @@ namespace TuristikFirma.TuristikFirma.DataAccess
             
         }
 
-        public DbSet<PostEntity> Posts { get; set; }
+        public DbSet<TourEntity> Tours { get; set; }
     }
 }

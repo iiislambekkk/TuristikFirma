@@ -10,7 +10,7 @@ using TuristikFirma.Models;
 //User123@example.com
 namespace TuristikFirma.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UsersController : ControllerBase
     {

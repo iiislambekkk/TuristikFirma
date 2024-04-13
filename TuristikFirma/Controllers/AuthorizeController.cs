@@ -11,7 +11,7 @@ using TuristikFirma.Models;
 
 namespace TuristikFirma.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/authorize")]
     [ApiController]
     
     public class AuthorizeController : ControllerBase
@@ -27,7 +27,7 @@ namespace TuristikFirma.Controllers
             _options = optAccess.Value;
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(OtherParamUser paramUser)
         {
             var user = new User { UserName = paramUser.UserName, Email = paramUser.Email, avatarPath = paramUser.avatarPath};
@@ -72,7 +72,7 @@ namespace TuristikFirma.Controllers
             return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
 
-        [HttpPost("SignIn")]
+        [HttpPost("signIn")]
         public async Task<IActionResult> SignIn(ParamUser paramUser)
         {
             var user = await _userManager.FindByEmailAsync(paramUser.Email);
