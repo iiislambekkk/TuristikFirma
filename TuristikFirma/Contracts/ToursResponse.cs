@@ -10,5 +10,10 @@
         string DescriptionRu,
         decimal Price,
         string PreviewPhotoPath,
-        string Country);
+        string Country,
+        string DaysEn,
+        string DaysKz,
+        string DaysRu,
+        int NumOfDays
+        );
 }

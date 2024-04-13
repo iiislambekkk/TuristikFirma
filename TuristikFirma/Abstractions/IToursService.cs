@@ -8,6 +8,6 @@ namespace TuristikFirma.Abstractions
         Task<Guid> DeleteTour(Guid id);
         Task<List<Tour>> GetAllTours();
         Task<Tour> GetOneTour(Guid id);
-        Task<Guid> UpdateTour(Guid id, string titleEn, string titleKz, string titleRu, string descriptionEn, string descriptionKz, string descriptionRu, decimal price, string previewPhotoPath, string country);
+        Task<Guid> UpdateTour(Guid id, string titleEn, string titleKz, string titleRu, string descriptionEn, string descriptionKz, string descriptionRu, decimal price, string previewPhotoPath, string country, string daysEn, string daysKz, string daysRu, int numOfDays);
     }
 }

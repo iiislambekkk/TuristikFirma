@@ -17,65 +17,71 @@ namespace TuristikFirma.TuristikFirma.DataAccess.Repositories
 
         public async Task<List<Tour>> GetAll()
         {
-            var postEntities = await _context.Tours
+            var tourEntities = await _context.Tours
                 .AsNoTracking()
                 .ToListAsync();
 
-            var posts = postEntities
-                .Select(b => Tour.Create(b.Id, b.TitleEn, b.TitleKz, b.TitleRu, b.DescriptionEn, b.DescriptionKz, b.DescriptionRu, b.Price, b.PreviewPhotoPath, b.Country).Post)
+            var tours = tourEntities
+                .Select(b => Tour.Create(b.Id, b.TitleEn, b.TitleKz, b.TitleRu, b.DescriptionEn, b.DescriptionKz, b.DescriptionRu, b.Price, b.PreviewPhotoPath, b.Country, b.DaysEn, b.DaysKz, b.DaysRu, b.NumOfDays).Tour)
                 .ToList();
 
-            return posts;
+            return tours;
         }
 
-        
-    public async Task<Tour> GetOne(Guid id)
+
+        public async Task<Tour> GetOne(Guid id)
         {
-            var tourEntity =  _context.Tours.Find(id);
-            
+            var tourEntity = _context.Tours.Find(id);
+
             if (tourEntity == null)
             {
                 return Tour.Create(id,
                 "Error", "Error", "Error",
                 "Error", "Error", "Error",
-                0, "Error", "Error").Post;
+                0, "Error", "Error", "Error", "Error", "Error", 0).Tour;
             }
 
-            var tour = Tour.Create(tourEntity.Id, 
-                tourEntity.TitleEn, tourEntity.TitleKz, tourEntity.TitleRu, 
-                tourEntity.DescriptionEn, tourEntity.DescriptionKz, tourEntity.DescriptionRu, 
-                tourEntity.Price, tourEntity.PreviewPhotoPath, tourEntity.Country).Post;
+            var tour = Tour.Create(tourEntity.Id,
+                tourEntity.TitleEn, tourEntity.TitleKz, tourEntity.TitleRu,
+                tourEntity.DescriptionEn, tourEntity.DescriptionKz, tourEntity.DescriptionRu,
+                tourEntity.Price, tourEntity.PreviewPhotoPath, tourEntity.Country, tourEntity.DaysEn, tourEntity.DaysKz, tourEntity.DaysRu, tourEntity.NumOfDays).Tour;
 
             return tour;
         }
 
-        public async Task<Guid> Create(Tour post)
+        public async Task<Guid> Create(Tour tour)
         {
-            var postEntity = new TourEntity
+            var tourEntity = new TourEntity
             {
-                Id = post.Id,
+                Id = tour.Id,
 
-                TitleEn = post.TitleEn,
-                TitleKz = post.TitleKz,
-                TitleRu = post.TitleRu,
+                TitleEn = tour.TitleEn,
+                TitleKz = tour.TitleKz,
+                TitleRu = tour.TitleRu,
 
-                DescriptionEn = post.DescriptionEn,
-                DescriptionKz = post.DescriptionKz,
-                DescriptionRu = post.DescriptionRu,
+                DescriptionEn = tour.DescriptionEn,
+                DescriptionKz = tour.DescriptionKz,
+                DescriptionRu = tour.DescriptionRu,
 
-                PreviewPhotoPath = post.PreviewPhotoPath,
-                Country = post.Country,
+                PreviewPhotoPath = tour.PreviewPhotoPath,
+                Country = tour.Country,
 
-                Price = post.Price
+                Price = tour.Price,
+
+                DaysEn = tour.DaysEn,
+                DaysKz = tour.DaysKz,
+                DaysRu = tour.DaysRu,
+
+                NumOfDays = tour.NumOfDays,
             };
 
-            await _context.Tours.AddAsync(postEntity);
+            await _context.Tours.AddAsync(tourEntity);
             await _context.SaveChangesAsync();
 
-            return postEntity.Id;
+            return tourEntity.Id;
         }
 
-        public async Task<Guid> Update(Guid id, string titleEn, string titleKz, string titleRu, string descriptionEn, string descriptionKz, string descriptionRu, decimal price, string previewPhotoPath, string country)
+        public async Task<Guid> Update(Guid id, string titleEn, string titleKz, string titleRu, string descriptionEn, string descriptionKz, string descriptionRu, decimal price, string previewPhotoPath, string country, string daysEn, string daysKz, string daysRu, int numOfDays)
         {
             await _context.Tours
                 .Where(b => b.Id == id)
@@ -89,6 +95,10 @@ namespace TuristikFirma.TuristikFirma.DataAccess.Repositories
                     .SetProperty(b => b.PreviewPhotoPath, b => previewPhotoPath)
                     .SetProperty(b => b.Country, b => country)
                     .SetProperty(b => b.Price, b => price)
+                    .SetProperty(b => b.DaysEn, b => daysEn)
+                    .SetProperty(b => b.DaysKz, b => daysKz)
+                    .SetProperty(b => b.DaysRu, b => daysRu)
+                    .SetProperty(b => b.NumOfDays, b => numOfDays)
                 );
 
             return id;

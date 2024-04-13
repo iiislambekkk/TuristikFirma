@@ -23,6 +23,10 @@ namespace TuristikFirma.TuristikFirma.DataAccess.Configurations
             builder.Property(b => b.Country).IsRequired();
 
             builder.Property(b => b.Price).IsRequired();
+
+            builder.Property(b => b.DaysEn).IsRequired();
+            builder.Property(b => b.DaysKz).IsRequired();
+            builder.Property(b => b.DaysRu).IsRequired();
         }
     }
 }

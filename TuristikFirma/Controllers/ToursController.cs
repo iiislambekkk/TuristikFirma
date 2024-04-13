@@ -8,7 +8,6 @@ using System.Net;
 using TuristikFirma.Abstractions;
 using TuristikFirma.Contracts;
 using TuristikFirma.Models;
-using TuristikFirma.Services;
 
 namespace TuristikFirma.Controllers
 {
@@ -33,7 +32,7 @@ namespace TuristikFirma.Controllers
             var response = tours.Select(b => new ToursResponse(b.Id, b.TitleEn, b.TitleKz, 
                                                                b.TitleRu, b.DescriptionEn, b.DescriptionKz, 
                                                                b.DescriptionRu, b.Price, b.PreviewPhotoPath, 
-                                                               b.Country));
+                                                               b.Country, b.DaysEn, b.DaysKz, b.DaysRu, b.NumOfDays));
 
             return Ok(response);
         }
@@ -47,7 +46,7 @@ namespace TuristikFirma.Controllers
             var response = new ToursResponse(b.Id, b.TitleEn, b.TitleKz,
                                                                b.TitleRu, b.DescriptionEn, b.DescriptionKz,
                                                                b.DescriptionRu, b.Price, b.PreviewPhotoPath,
-                                                               b.Country);
+                                                               b.Country, b.DaysEn, b.DaysRu, b.DaysKz, b.NumOfDays);
 
             return Ok(response);
         }
@@ -67,7 +66,11 @@ namespace TuristikFirma.Controllers
                 request.DescriptionRu,
                 request.Price,
                 request.PreviewPhotoPath,
-                request.Country
+                request.Country,
+                request.DaysEn,
+                request.DaysKz,
+                request.DaysRu,
+                request.NumOfDays
                 );
 
             if (!string.IsNullOrEmpty(error))
@@ -93,7 +96,12 @@ namespace TuristikFirma.Controllers
                 request.DescriptionRu,
                 request.Price,
                 request.PreviewPhotoPath,
-                request.Country);
+                request.Country,
+                request.DaysEn,
+                request.DaysKz,
+                request.DaysRu,
+                request.NumOfDays
+                );
 
             return Ok(bookId);
         }

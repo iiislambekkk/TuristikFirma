@@ -1,6 +1,5 @@
 ﻿using TuristikFirma.Abstractions;
 using TuristikFirma.Models;
-using TuristikFirma.TuristikFirma.DataAccess.Repositories;
 
 namespace TuristikFirma.Services
 {
@@ -28,9 +27,9 @@ namespace TuristikFirma.Services
             return await _toursRepository.Create(tour);
         }
 
-        public async Task<Guid> UpdateTour(Guid id, string titleEn, string titleKz, string titleRu, string descriptionEn, string descriptionKz, string descriptionRu, decimal price, string previewPhotoPath, string country)
+        public async Task<Guid> UpdateTour(Guid id, string titleEn, string titleKz, string titleRu, string descriptionEn, string descriptionKz, string descriptionRu, decimal price, string previewPhotoPath, string country, string daysEn, string daysKz, string daysRu, int numOfDays)
         {
-            return await _toursRepository.Update(id, titleEn, titleKz, titleRu, descriptionEn, descriptionKz, descriptionRu, price, previewPhotoPath, country);
+            return await _toursRepository.Update(id, titleEn, titleKz, titleRu, descriptionEn, descriptionKz, descriptionRu, price, previewPhotoPath, country, daysEn, daysKz, daysRu, numOfDays);
         }
         public async Task<Guid> DeleteTour(Guid id)
         {
