@@ -8,6 +8,7 @@ using TuristikFirma.Abstractions;
 using TuristikFirma.Models;
 
 //User123@example.com
+//I58slambekgazzizz@gmail.com
 namespace TuristikFirma.Controllers
 {
     [Route("api/user")]
@@ -22,6 +23,29 @@ namespace TuristikFirma.Controllers
             _helperService = helperService;
             _userManager = user;
         }
+
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<User>> GetUser(string id)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(user);
+        }
+
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        [HttpGet("userinfo")]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            User user = await _userManager.FindByEmailAsync(User.Identity.Name);
+
+            return Ok(user);
+        }
+        
 
         [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPost("uploadAvatar")]

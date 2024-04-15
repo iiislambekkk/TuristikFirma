@@ -17,11 +17,13 @@ namespace TuristikFirma.Controllers
     {
         private readonly IToursService _toursService;
         private readonly IHelperService _helperService;
+        private readonly ICommentsService _commentsService;
 
-        public ToursController(IToursService toursService, IHelperService helperService) 
+        public ToursController(IToursService toursService, IHelperService helperService, ICommentsService commentsService) 
         {
             _toursService = toursService;
             _helperService = helperService;
+            _commentsService = commentsService;
         }
 
         [HttpGet]
@@ -88,7 +90,7 @@ namespace TuristikFirma.Controllers
         [Authorize("OnlyAdmin")]
         public async Task<ActionResult<Guid>> UpdatePost(Guid id, [FromBody] ToursRequest request)
         {
-            var bookId = await _toursService.UpdateTour(id, request.TitleEn,
+            var tourId = await _toursService.UpdateTour(id, request.TitleEn,
                 request.TitleKz,
                 request.TitleRu,
                 request.DescriptionEn,
@@ -103,7 +105,7 @@ namespace TuristikFirma.Controllers
                 request.NumOfDays
                 );
 
-            return Ok(bookId);
+            return Ok(tourId);
         }
 
         [HttpDelete("{id:guid}")]
@@ -111,6 +113,7 @@ namespace TuristikFirma.Controllers
         [Authorize("OnlyAdmin")]
         public async Task<ActionResult<Guid>> DeleteTour(Guid id)
         {
+            await _commentsService.DeleteAllCommentsFromEntity(id);
             return Ok(await _toursService.DeleteTour(id));
         }
 

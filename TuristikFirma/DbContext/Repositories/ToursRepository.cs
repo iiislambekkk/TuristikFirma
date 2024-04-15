@@ -110,6 +110,8 @@ namespace TuristikFirma.TuristikFirma.DataAccess.Repositories
                 .Where(b => b.Id == id)
                 .ExecuteDeleteAsync();
 
+            _context.SaveChanges();
+
             return id;
         }
     }

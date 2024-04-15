@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TuristikFirma;
 using TuristikFirma.Abstractions;
+using TuristikFirma.DbContext.Repositories;
 using TuristikFirma.Models;
 using TuristikFirma.Services;
 using TuristikFirma.TuristikFirma.DataAccess;
@@ -56,6 +57,8 @@ builder.Services.AddAuthorization(option =>
 
 builder.Services.AddScoped<IHelperService, HelperService>();
 builder.Services.AddScoped<IToursService, ToursService>();
+builder.Services.AddScoped<ICommentsService, CommentsService>();
+builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
 builder.Services.AddScoped<IToursRepository, ToursRepository>();
 
 
